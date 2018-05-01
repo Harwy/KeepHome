@@ -1,0 +1,12 @@
+<litepal>
+    <dbname value="keep_home" />
+
+    <version value="1" />
+
+    <list>
+        <mapping class="com.shu.keephome.db.User" />
+        <mapping class="com.shu.keephome.db.Device" />
+        <mapping class="com.shu.keephome.db.Data" />
+    </list>
+
+</litepal>

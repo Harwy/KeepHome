@@ -10,10 +10,10 @@ import org.litepal.crud.DataSupport;
 public class Data extends DataSupport{
     String created;
     String message;
-    float hum;
-    float temp;
-    float pm2_5;
-    float hcho;
+    double hum;
+    double temp;
+    double pm2_5;
+    double hcho;
     int device;
     Boolean isDelete;
 
@@ -33,35 +33,35 @@ public class Data extends DataSupport{
         this.message = message;
     }
 
-    public float getHum() {
+    public double getHum() {
         return hum;
     }
 
-    public void setHum(float hum) {
+    public void setHum(double hum) {
         this.hum = hum;
     }
 
-    public float getTemp() {
+    public double getTemp() {
         return temp;
     }
 
-    public void setTemp(float temp) {
+    public void setTemp(double temp) {
         this.temp = temp;
     }
 
-    public float getPm2_5() {
+    public double getPm2_5() {
         return pm2_5;
     }
 
-    public void setPm2_5(float pm2_5) {
+    public void setPm2_5(double pm2_5) {
         this.pm2_5 = pm2_5;
     }
 
-    public float getHcho() {
+    public double getHcho() {
         return hcho;
     }
 
-    public void setHcho(float hcho) {
+    public void setHcho(double hcho) {
         this.hcho = hcho;
     }
 

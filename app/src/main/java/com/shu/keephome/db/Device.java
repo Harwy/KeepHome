@@ -8,8 +8,19 @@ import org.litepal.crud.DataSupport;
  */
 
 public class Device extends DataSupport{
+    int id;
+
     String name;
+
     int devtag;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

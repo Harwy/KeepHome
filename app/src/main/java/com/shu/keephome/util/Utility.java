@@ -2,8 +2,10 @@ package com.shu.keephome.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.shu.keephome.db.Data;
 import com.shu.keephome.db.Device;
+import com.shu.keephome.db.NewData;
 import com.shu.keephome.db.User;
 
 import org.json.JSONArray;
@@ -12,9 +14,11 @@ import org.json.JSONObject;
 
 /**
  * Created by 14623 on 2018/5/1.
+ *
  */
 
-public class Utility {
+public class Utility{
+
 
     /**
      * 解析和处理服务器返回的用户信息
@@ -70,7 +74,7 @@ public class Utility {
                 JSONArray allData = new JSONArray(response);
                 for (int i = 0; i<allData.length();i++){
                     JSONObject dataObject = allData.getJSONObject(i);
-                    Data data = new Data();
+                    NewData data = new NewData();
                     data.setCreated(dataObject.getString("created"));
                     data.setTemp(dataObject.getDouble("temp"));
                     data.setHum(dataObject.getDouble("hum"));
@@ -84,5 +88,20 @@ public class Utility {
             }
         }
         return false;
+    }
+
+
+    /**
+     * 解析和处理服务器返回的设备数据的最新一条数据信息
+     */
+    public static NewData handleNewDataResponse(String response){
+        try {
+            Gson gson = new Gson();
+            NewData t = gson.fromJson(response, NewData.class);
+            return t;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

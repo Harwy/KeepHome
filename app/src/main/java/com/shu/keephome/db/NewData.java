@@ -1,15 +1,13 @@
 package com.shu.keephome.db;
 
-import android.widget.Button;
-
 import org.litepal.crud.DataSupport;
 
 /**
- * Created by 14623 on 2018/5/1.
- * 数据集
+ * Created by 14623 on 2018/5/5.
+ *
  */
 
-public class Data {
+public class NewData extends DataSupport {
     String created;
     String message;
     double hum;
@@ -19,16 +17,6 @@ public class Data {
     int device;
     Boolean isDelete;
 
-    public Data(String created, String message, double hum, double temp, double pm2_5, double hcho, int device, Boolean isDelete){
-        this.created = created;
-        this.message = message;
-        this.hum = hum;
-        this.temp = temp;
-        this.pm2_5 = pm2_5;
-        this.hcho = hcho;
-        this.device = device;
-        this.isDelete = isDelete;
-    }
 
     public String getCreated() {
         return created;

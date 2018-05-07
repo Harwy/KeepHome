@@ -59,6 +59,8 @@ public class LoginFragment extends Fragment {
 
     private String status; // 登录认证状态字
 
+    private String userid; // 用户登录名下id
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -139,7 +141,7 @@ public class LoginFragment extends Fragment {
                                 }
                                 editor.apply();
                                 Intent intent = new Intent(getActivity(), DrawableActivity.class);
-                                intent.putExtra("username", account);
+                                intent.putExtra("userid", userid);  // 向下一个活动传递用户名
                                 startActivity(intent);
                                 getActivity().finish();
                             }else if ("1".equals(status)){
@@ -170,7 +172,9 @@ public class LoginFragment extends Fragment {
         try {
             JSONObject jsonObject = new JSONObject(jsondata);
             String  msg = jsonObject.getString("msg");
+            String  id = jsonObject.getString("id");
             status = msg;
+            userid = id;
         }catch (Exception e){
             e.printStackTrace();
         }

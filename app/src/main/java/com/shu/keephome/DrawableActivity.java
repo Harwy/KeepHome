@@ -14,24 +14,25 @@ import com.shu.keephome.db.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DrawableActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
-
-
-    // 模拟数据
-    private Data[] datas = {
-            new Data("2018-5-5","0",100,25,32,45,1,false),
-            new Data("2018-5-5","0",100,25,32,45,1,false),
-            new Data("2018-5-5","0",100,25,32,45,1,false),
-            new Data("2018-5-5","0",100,25,32,45,1,false),
-            new Data("2018-5-5","0",100,25,32,45,1,false),
-    };
-
-    private List<Data> dataList = new ArrayList<>();
-
-    private DataListAdapter adapter;
+//    private DrawerLayout mDrawerLayout;
+//
+//
+//    // 模拟数据
+//    private Data[] datas = {
+//            new Data("2018-5-5","0",100,25,32,45,1,false),
+//            new Data("2018-5-5","0",100,25,32,45,1,false),
+//            new Data("2018-5-5","0",100,25,32,45,1,false),
+//            new Data("2018-5-5","0",100,25,32,45,1,false),
+//            new Data("2018-5-5","0",100,25,32,45,1,false),
+//    };
+//
+//    private List<Data> dataList = new ArrayList<>();
+//
+//    private DataListAdapter adapter;
 
 
     @Override
@@ -39,15 +40,15 @@ public class DrawableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawable);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
-        }
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null){
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
+//        }
 
 //        initData();
 //        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -59,21 +60,21 @@ public class DrawableActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * 侧面栏
-     * @param item
-     * @return
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                break;
-            default:
-        }
-        return true;
-    }
+//    /**
+//     * 侧面栏
+//     * @param item
+//     * @return
+//     */
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item){
+//        switch (item.getItemId()){
+//            case android.R.id.home:
+//                mDrawerLayout.openDrawer(GravityCompat.START);
+//                break;
+//            default:
+//        }
+//        return true;
+//    }
 
 //    /**
 //     * 带入数据

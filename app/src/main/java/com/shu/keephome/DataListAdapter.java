@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.shu.keephome.db.Data;
 import com.shu.keephome.db.Device;
+import com.shu.keephome.db.DeviceList;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class DataListAdapter extends RecyclerView.Adapter<DataListAdapter.ViewHo
 
     private Context mContext;
 
-    private List<Data> mDataList;
+    private List<DeviceList> mDataList;
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
@@ -53,7 +54,7 @@ public class DataListAdapter extends RecyclerView.Adapter<DataListAdapter.ViewHo
         }
     }
 
-    public DataListAdapter(List<Data> dataList){
+    public DataListAdapter(List<DeviceList> dataList){
         mDataList = dataList;
     }
 
@@ -73,12 +74,14 @@ public class DataListAdapter extends RecyclerView.Adapter<DataListAdapter.ViewHo
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Data data = mDataList.get(position);
-        holder.main.setText(data.getCreated());
-        holder.temp.setText(String.valueOf(data.getTemp()));
-        holder.hum.setText(String.valueOf(data.getHum()));
-        holder.pm2_5.setText(String.valueOf(data.getPm2_5()));
-        holder.hcho.setText(String.valueOf(data.getHcho()));
+        final DeviceList data = mDataList.get(position);
+        String hum_temp = String.valueOf(data.nowtime.hum);
+        String tem_temp = String.valueOf(data.nowtime.hum) + "℃";
+        holder.main.setText(data.devID);
+        holder.temp.setText(tem_temp);
+        holder.hum.setText(hum_temp);
+        holder.pm2_5.setText(String.valueOf(data.nowtime.pm2_5));
+        holder.hcho.setText(String.valueOf(data.nowtime.hcho));
         //将数据保存在itemView的Tag中，以便点击时进行获取
         holder.itemView.setTag(mDataList.get(position));
     }

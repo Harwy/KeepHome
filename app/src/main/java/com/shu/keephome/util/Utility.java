@@ -3,14 +3,18 @@ package com.shu.keephome.util;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.shu.keephome.db.Data;
 import com.shu.keephome.db.Device;
+import com.shu.keephome.db.DeviceList;
 import com.shu.keephome.db.NewData;
 import com.shu.keephome.db.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Created by 14623 on 2018/5/1.
@@ -99,6 +103,19 @@ public class Utility{
             Gson gson = new Gson();
             NewData t = gson.fromJson(response, NewData.class);
             return t;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 将返回的JSON数据解析成DeviceList实体类
+     */
+    public static List<DeviceList>  handleDeviceListResponse(String response){
+        try {
+            return new Gson().fromJson(response, new TypeToken<List<DeviceList>>()
+            {}.getType());
         }catch (Exception e){
             e.printStackTrace();
         }

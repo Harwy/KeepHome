@@ -8,7 +8,7 @@
     android:layout_margin="15dp"
     app:cardCornerRadius="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,55 +18,137 @@
             android:id="@+id/device_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_gravity="end"
             android:textColor="#000000"
-            android:textSize="60sp"
-            android:text="设备"/>
+            android:textSize="50sp"
+            android:text="设备ID"/>
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp">
-            <TextView
-                android:id="@+id/device_temp"
+            >
+            <LinearLayout
+                android:id="@+id/temp_layout"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_gravity="end"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:text="温度"/>
-            <TextView
-                android:id="@+id/device_hum"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="温度"/>
+                <TextView
+                    android:id="@+id/device_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="0℃"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_gravity="end"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:text="湿度"/>
-            <TextView
-                android:id="@+id/device_pm2_5"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="湿度"/>
+                <TextView
+                    android:id="@+id/device_hum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="0%"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_gravity="end"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:text="PM2.5"/>
-            <TextView
-                android:id="@+id/device_hcho"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="PM2.5"/>
+                <TextView
+                    android:id="@+id/device_pm2_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="0ppm"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_gravity="end"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:text="甲烷"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="甲烷"/>
+                <TextView
+                    android:id="@+id/device_hcho"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:text="0mg"/>
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="220dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_online"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:text="在线"/>
+        </LinearLayout>
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -1,61 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:padding="60dp">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/inf_toolbar"
+    <!--TextInputLayout的颜色来自style中的colorAccent的颜色-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:textSize="20dp"
+        android:text="用户信息"/>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/AlertDialog.AppCompat.Light"/>
-
-    <LinearLayout
-        android:id="@+id/inf_line_1"
-        android:layout_below="@+id/inf_toolbar"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <Container
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="名字:"/>
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="jackson"/>
-        </Container>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_below="@+id/inf_line_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="性别："/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/inf_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="男"/>
+            android:hint="用户名"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/inf_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+    <include
+        android:id="@+id/inf_sex"
+        layout="@layout/sex_show" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/inf_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="年龄"
+            android:inputType="textCapWords" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/inf_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="地址"
+            android:inputType="textLongMessage" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/inf_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="更新"/>
 
 
-    </LinearLayout>
 
-
-
-</RelativeLayout>
+</LinearLayout>

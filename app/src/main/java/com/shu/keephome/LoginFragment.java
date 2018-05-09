@@ -74,6 +74,7 @@ public class LoginFragment extends Fragment {
         login = (Button) view.findViewById(R.id.login);
         username = (EditText) view.findViewById(R.id.edit_username);
         password = (EditText)view.findViewById(R.id.edit_password);
+        password.setTransformationMethod(PasswordTransformationMethod.getInstance());
         rememberPass = (CheckBox) view.findViewById(R.id.remember_pass);
         tip = (TextView) view.findViewById(R.id.login_tip);
         showPass = (CheckBox) view.findViewById(R.id.show_pass);

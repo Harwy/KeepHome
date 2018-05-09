@@ -9,7 +9,11 @@ import org.litepal.crud.DataSupport;
 
 public class User extends DataSupport{
     int id;
-    String name;
+    String userName;
+    String userEmail;
+    String userAddress;
+    String userAge;
+    int userSex;
 
     public int getId() {
         return id;
@@ -19,11 +23,43 @@ public class User extends DataSupport{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public String getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(String userAge) {
+        this.userAge = userAge;
+    }
+
+    public int getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(int userSex) {
+        this.userSex = userSex;
     }
 }

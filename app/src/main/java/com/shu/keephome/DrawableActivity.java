@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,6 +84,10 @@ public class DrawableActivity extends AppCompatActivity{
 
     private int flag = 1;
 
+    Intent intent_nav;
+
+    private List<String> device_data_list = new ArrayList<>();
+
 
 
 
@@ -137,12 +142,15 @@ public class DrawableActivity extends AppCompatActivity{
                         Log.d(TAG, "onNavigationItemSelected: 111："+ item);
                         break;
                     case R.id.nav_inf :
+                        intent_nav = new Intent(DrawableActivity.this, InfActivity.class);
+                        intent_nav.putExtra("index", userid);
+                        startActivity(intent_nav);
                         Log.d(TAG, "onNavigationItemSelected: 111："+ item);
                         break;
                     case R.id.nav_about :
-                        Intent intent = new Intent(DrawableActivity.this, AboutActivity.class);
-                        intent.putExtra("index", item.getTitle());
-                        startActivity(intent);
+                        intent_nav = new Intent(DrawableActivity.this, AboutActivity.class);
+                        intent_nav.putExtra("index", item.getTitle());
+                        startActivity(intent_nav);
                         Log.d(TAG, "onNavigationItemSelected: 111："+ item.getTitle());
                         break;
                     default:
@@ -156,10 +164,9 @@ public class DrawableActivity extends AppCompatActivity{
             @Override
             public void onClick(View view, int position) {
                 Intent intent = new Intent(DrawableActivity.this, DataShowActivity.class);
-                intent.putExtra("device_id", position);  // 向下一个活动传递用户名
-                Log.d(TAG, "onClick: position = "+ position);
+                intent.putExtra("device_id", device_data_list.get(position));  // 向下一个活动传递用户名
+                Log.d(TAG, "onClick: position = "+ device_data_list.get(position));
                 startActivity(intent);
-                DrawableActivity.this.finish();
             }
         });
 
@@ -317,7 +324,9 @@ public class DrawableActivity extends AppCompatActivity{
         dataList.clear();
         Log.d(TAG, "showDeviceList: 设备列表 = " + deviceList.size());
         for (int i = 0; i < deviceList.size();i++){
-            DeviceList d = deviceList.get((i));
+            DeviceList d = deviceList.get(i);
+            device_data_list.add(String.valueOf(deviceList.get(i).id));
+            Log.d(TAG, "showDeviceList: deviceList.get(i).id :" + deviceList.get(i).id);
             SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss.SSS");
             try {
                 d.nowtime.date = format.parse(d.nowtime.created);
@@ -353,28 +362,5 @@ public class DrawableActivity extends AppCompatActivity{
         }
     }
 
-//    /**
-//     * 下拉更新设备列表信息(待更新)
-//     */
-//    private void refreshDevices(){
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try{
-//                    Thread.sleep(2000);
-//                    initData(userid);
-//                }catch (InterruptedException e){
-//                    e.printStackTrace();
-//                }
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        adapter.notifyDataSetChanged();
-//                        deviceRefresh.setRefreshing(false);
-//                    }
-//                });
-//            }
-//        });
-//    }
 
 }

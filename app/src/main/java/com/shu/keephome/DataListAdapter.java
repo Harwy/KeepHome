@@ -11,12 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.shu.keephome.db.Data;
-import com.shu.keephome.db.Device;
 import com.shu.keephome.db.DeviceList;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 

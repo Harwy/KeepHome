@@ -14,25 +14,25 @@ import java.util.List;
 
 public class JsonParse {
 
-    public static String setUserJSON(String data){
-        // 组成数据
-        User setjson = new User();
-        setjson.setName(data);
-        // 转化为json
-        Gson gson = new Gson();
-        String jsonObject = gson.toJson(setjson);
-        System.out.println("json组成为：" + jsonObject);
-        return jsonObject;
-    }
-
-    public static String setDeviceJSON(String data){
-        // 组成数据
-        Device setjson = new Device();
-        setjson.setName(data);
-        // 转化为json
-        Gson gson = new Gson();
-        String jsonObject = gson.toJson(setjson);
-        System.out.println("json组成为：" + jsonObject);
-        return jsonObject;
-    }
+//    public static String setUserJSON(String data){
+//        // 组成数据
+//        User setjson = new User();
+//        setjson.setName(data);
+//        // 转化为json
+//        Gson gson = new Gson();
+//        String jsonObject = gson.toJson(setjson);
+//        System.out.println("json组成为：" + jsonObject);
+//        return jsonObject;
+//    }
+//
+//    public static String setDeviceJSON(String data){
+//        // 组成数据
+//        Device setjson = new Device();
+//        setjson.setName(data);
+//        // 转化为json
+//        Gson gson = new Gson();
+//        String jsonObject = gson.toJson(setjson);
+//        System.out.println("json组成为：" + jsonObject);
+//        return jsonObject;
+//    }
 }

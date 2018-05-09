@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -82,10 +83,6 @@ public class DrawableActivity extends AppCompatActivity{
 
     private int flag = 1;
 
-    private CharSequence mDrawerTitle;
-
-    private CharSequence mTitle;
-
 
 
 
@@ -103,31 +100,10 @@ public class DrawableActivity extends AppCompatActivity{
             }
         });
 
-        mTitle = mDrawerTitle = getTitle();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navView = (NavigationView) findViewById(R.id.nav_view);
-//        mDrawerToggle = new ActionBarDrawerToggle(
-//                this,
-//                mDrawerLayout,
-//                R.drawable.back,
-//                R.string.drawer_open,
-//                R.string.drawer_close
-//                ){
-//            public void onDrawerClosed(View view){
-//                getActionBar().setTitle(mTitle);
-//                invalidateOptionsMenu();
-//            }
-//            public void onDrawerOpened(View drawerView){
-//                getActionBar().setTitle(mDrawerTitle);
-//                invalidateOptionsMenu();
-//            }
-//            mDrawerLayout.setDrawerListener(mDrawerToggle);
-//        };
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navView = (NavigationView) findViewById(R.id.nav_view);
 
         actionBar = getSupportActionBar();
         Log.d(TAG, "onCreateView: actionBar = " + actionBar);
@@ -149,6 +125,32 @@ public class DrawableActivity extends AppCompatActivity{
         // 添加首次更新
         // 查询设备信息
         initData(userid);
+
+//        navView.setCheckedItem(R.id.nav_add);
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mDrawerLayout.closeDrawers();
+                Log.d(TAG, "onNavigationItemSelected: 菜单："+ item);
+                switch (item.getItemId()){
+                    case R.id.nav_add :
+                        Log.d(TAG, "onNavigationItemSelected: 111："+ item);
+                        break;
+                    case R.id.nav_inf :
+                        Log.d(TAG, "onNavigationItemSelected: 111："+ item);
+                        break;
+                    case R.id.nav_about :
+                        Intent intent = new Intent(DrawableActivity.this, AboutActivity.class);
+                        intent.putExtra("index", item.getTitle());
+                        startActivity(intent);
+                        Log.d(TAG, "onNavigationItemSelected: 111："+ item.getTitle());
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
 
         adapter.setClickListener(new DataListAdapter.OnItemClickListener() {
             @Override
@@ -180,7 +182,10 @@ public class DrawableActivity extends AppCompatActivity{
         return true;
     }
 
-
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        return super.onContextItemSelected(item);
+    }
 
     /**
      * 查询用户信息

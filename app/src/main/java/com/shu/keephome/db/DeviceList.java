@@ -1,5 +1,7 @@
 package com.shu.keephome.db;
 
+import java.util.Date;
+
 /**
  * Created by 14623 on 2018/5/7.
  * 设备；列表类
@@ -7,7 +9,7 @@ package com.shu.keephome.db;
 
 public class DeviceList {
 
-    public String devID ;
+    public String devId ;
 
     public String devName;
 
@@ -26,6 +28,8 @@ public class DeviceList {
         public double pm2_5;
 
         public double temp;
+
+        public Date date;
 
     }
 }

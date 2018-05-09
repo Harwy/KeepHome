@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KeepHome</string>
+    <string name="nav_header_name">jackson</string>
+    <string name="nav_header_mail">jackson@163.com</string>
 </resources>

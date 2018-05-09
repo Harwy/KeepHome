@@ -9,11 +9,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +59,8 @@ public class LoginFragment extends Fragment {
 
     private ProgressDialog  progressDialog;
 
+    private CheckBox showPass;
+
 
     private String status; // 登录认证状态字
 
@@ -71,6 +76,19 @@ public class LoginFragment extends Fragment {
         password = (EditText)view.findViewById(R.id.edit_password);
         rememberPass = (CheckBox) view.findViewById(R.id.remember_pass);
         tip = (TextView) view.findViewById(R.id.login_tip);
+        showPass = (CheckBox) view.findViewById(R.id.show_pass);
+        showPass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    //如果选中，显示密码
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else {
+                    //否则隐藏密码
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
         boolean isRemember = pref.getBoolean("remember_password", false);
         if (isRemember){
             //账号密码设置到文本框

@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="tony@163.com"
+        android:text="@string/nav_header_mail"
         android:textColor="#FFF"
         android:textSize="14sp"/>
 
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/mail"
-        android:text="Tony Green"
+        android:text="@string/nav_header_name"
         android:textColor="#FFF"
         android:textSize="14sp" />
 

@@ -10,9 +10,12 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         >
+
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
     </RelativeLayout>
 
@@ -25,7 +28,7 @@
     <RelativeLayout
         android:layout_width="240dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="160dp">
 
         <LinearLayout
@@ -46,9 +49,9 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="240dp"
+        android:layout_width="3000dp"
         android:layout_height="120dp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="220dp">
 
         <LinearLayout
@@ -64,7 +67,17 @@
                 android:id="@+id/edit_password"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:inputType="textPassword" />
+
+
+            <CheckBox
+                android:id="@+id/show_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="显示\n密码"
+                />
         </LinearLayout>
 
         <LinearLayout

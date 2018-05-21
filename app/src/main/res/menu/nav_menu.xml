@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_add"
             android:title="添加设备" />
         <item
+            android:id="@+id/nav_control"
+            android:icon="@drawable/ic_videogame_asset_blue_a100_24dp"
+            android:title="控制设备" />
+        <item
             android:id="@+id/nav_inf"
             android:icon="@drawable/ic_person"
             android:title="个人信息" />

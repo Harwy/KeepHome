@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#fff"
@@ -95,7 +95,7 @@
                 android:layout_marginLeft="20sp"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:text="温度"/>
+                android:text="PM2.5指数"/>
 
             <TextView
                 android:id="@+id/data_pm2_5"
@@ -122,14 +122,14 @@
                 android:layout_marginLeft="20sp"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:text="PM2.5指数"/>
+                android:text="甲醛浓度"/>
 
             <TextView
                 android:id="@+id/data_hcho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="#fff"

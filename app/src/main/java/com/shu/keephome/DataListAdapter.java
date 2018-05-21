@@ -2,6 +2,7 @@ package com.shu.keephome;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -94,6 +95,21 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }else {
             ((DHolder)holder).device_set_text.setText("离线");
             ((DHolder)holder).device_set_img.setImageResource(R.drawable.ic_outoffline);
+        }
+        if (data.nowtime.hum > 75){
+            ((DHolder)holder).hum.setTextColor(Color.parseColor("#FF0000"));
+        }else {
+            ((DHolder)holder).hum.setTextColor(Color.parseColor("#000000"));
+        }
+        if (data.nowtime.temp > 32){
+            ((DHolder)holder).temp.setTextColor(Color.parseColor("#FF0000"));
+        }else {
+            ((DHolder)holder).temp.setTextColor(Color.parseColor("#000000"));
+        }
+        if (data.nowtime.pm2_5 > 100){
+            ((DHolder)holder).hum.setTextColor(Color.parseColor("#FF0000"));
+        }else {
+            ((DHolder)holder).hum.setTextColor(Color.parseColor("#000000"));
         }
         String uptime_temp = String.valueOf(data.nowtime.date);
         String hum_temp = String.valueOf(data.nowtime.hum) + " %";

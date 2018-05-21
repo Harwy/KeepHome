@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">KeepHome</string>
-    <string name="nav_header_name">jackson</string>
-    <string name="nav_header_mail">jackson@163.com</string>
+    <string name="nav_header_name">test</string>
+    <string name="nav_header_mail">test@163.com</string>
+    <string name="wifi_note">注：请勿选择5G网络，否则无法添加设备！</string>
 </resources>

@@ -21,6 +21,8 @@ public class DeviceList {
 
         public String created;
 
+        public String message;
+
         public double hcho;
 
         public double hum;

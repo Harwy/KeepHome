@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.shu.keephome.db.Data;
 import com.shu.keephome.db.DeviceList;
+import com.shu.keephome.service.AutoUpdateService;
 import com.shu.keephome.util.HttpUtil;
 import com.shu.keephome.util.Utility;
 
@@ -71,6 +73,11 @@ public class DrawableActivity extends AppCompatActivity{
     GridLayoutManager layoutManager;
 
     NavigationView navView;
+    /**修改侧滑栏信息**/
+    View headerLayout;
+    TextView name;
+    TextView email;
+
 
     ActionBar actionBar;
 
@@ -109,6 +116,10 @@ public class DrawableActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navView = (NavigationView) findViewById(R.id.nav_view);
+        /**修改用户名和邮箱*/
+        headerLayout = navView.inflateHeaderView(R.layout.nav_header);
+        name = (TextView) headerLayout.findViewById(R.id.username);
+        email = (TextView) headerLayout.findViewById(R.id.mail);
 
         actionBar = getSupportActionBar();
         Log.d(TAG, "onCreateView: actionBar = " + actionBar);
@@ -124,12 +135,21 @@ public class DrawableActivity extends AppCompatActivity{
         adapter = new DataListAdapter(dataList);
         recyclerView.setAdapter(adapter);
 
-        userid = this.getIntent().getStringExtra("userid");  // 接收上一个活动LoginFragment传递的用户名
-        // 查询用户信息
-        initUser(userid);
-        // 添加首次更新
-        // 查询设备信息
-        initData(userid);
+        if(userid != null){
+            // 查询用户信息
+            initUser(userid);
+            // 添加首次更新
+            // 查询设备信息
+            initData(userid);
+        }else{
+            userid = this.getIntent().getStringExtra("userid");  // 接收上一个活动LoginFragment传递的用户名
+            // 查询用户信息
+            initUser(userid);
+            // 添加首次更新
+            // 查询设备信息
+            initData(userid);
+        }
+
 
 //        navView.setCheckedItem(R.id.nav_add);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -139,6 +159,8 @@ public class DrawableActivity extends AppCompatActivity{
                 Log.d(TAG, "onNavigationItemSelected: 菜单："+ item);
                 switch (item.getItemId()){
                     case R.id.nav_add :
+                        intent_nav = new Intent(DrawableActivity.this, AddActivity.class);
+                        startActivity(intent_nav);
                         Log.d(TAG, "onNavigationItemSelected: 111："+ item);
                         break;
                     case R.id.nav_inf :
@@ -152,6 +174,10 @@ public class DrawableActivity extends AppCompatActivity{
                         intent_nav.putExtra("index", item.getTitle());
                         startActivity(intent_nav);
                         Log.d(TAG, "onNavigationItemSelected: 111："+ item.getTitle());
+                        break;
+                    case R.id.nav_control:
+                        intent_nav = new Intent(DrawableActivity.this, ControlActivity.class);
+                        startActivity(intent_nav);
                         break;
                     default:
                         break;
@@ -224,6 +250,8 @@ public class DrawableActivity extends AppCompatActivity{
                         @Override
                         public void run() {
                             closeProgressDialog();
+                            name.setText(userName);
+                            name.setText(userEmail);
                             Log.d(TAG, "onActivityCreated: open");
                             Log.d(TAG, "run: 测试userName是否可用"+ userName);
 
@@ -290,9 +318,9 @@ public class DrawableActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String s = response.body().string();
-                Log.d(TAG, "onResponse: s = "+s);
+//                Log.d(TAG, "onResponse: s = "+s);
                 final List<DeviceList> deviceLists = Utility.handleDeviceListResponse(s);
-                Log.d(TAG, "showDeviceList: 设备列表 = " + deviceLists.size());
+//                Log.d(TAG, "showDeviceList: 设备列表 = " + deviceLists.size());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -336,6 +364,9 @@ public class DrawableActivity extends AppCompatActivity{
             Log.d(TAG, "showDeviceList: nowtime.data = " + d.nowtime.date);
             dataList.add(deviceList.get(i));
         }
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
+        Log.d(TAG, "showDeviceList: 后台服务启动");
     }
 
 

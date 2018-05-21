@@ -61,6 +61,10 @@ public class LoginFragment extends Fragment {
 
     private CheckBox showPass;
 
+    private TextView forget;
+
+    private TextView sign_in;
+
 
     private String status; // 登录认证状态字
 
@@ -78,6 +82,8 @@ public class LoginFragment extends Fragment {
         rememberPass = (CheckBox) view.findViewById(R.id.remember_pass);
         tip = (TextView) view.findViewById(R.id.login_tip);
         showPass = (CheckBox) view.findViewById(R.id.show_pass);
+        forget = (TextView) view.findViewById(R.id.forget);
+        sign_in = (TextView) view.findViewById(R.id.sign_in);
         showPass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -120,7 +126,23 @@ public class LoginFragment extends Fragment {
                 requestPerson(json);
             }
         });
+        sign_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SignInActivity.class);
+                startActivity(intent);
             }
+        });
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ForgetActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
 
 
     public void requestPerson(final String json){

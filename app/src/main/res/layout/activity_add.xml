@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shu.keephome.AddActivity" >
+
+    <!-- 备注 -->
+    <TextView
+        android:id="@+id/add_text"
+        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="网络"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/add_text1"
+        android:layout_alignBaseline="@id/add_text"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wifi_note"/>
+    <!-- 网络WIFI名字 -->
+    <EditText
+        android:id="@+id/add_wifi"
+        android:layout_below="@id/add_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入WIFI名称..."
+        android:text="wpp"
+        android:drawableLeft="@drawable/ic_wifi_blue_a100_24dp"
+        android:drawableRight="@drawable/ic_chevron_right_blue_a100_24dp"
+        android:drawablePadding="10dp" />
+    <!-- 备注 -->
+    <TextView
+        android:id="@+id/add_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/add_wifi"
+        android:text="密码"
+        android:textSize="20sp" />
+    <!-- WIFI密码 -->
+    <EditText
+        android:id="@+id/add_pass"
+        android:layout_below="@id/add_text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入密码..."
+        android:text="12345678"
+        android:drawableLeft="@drawable/ic_vpn_key_blue_a100_24dp"
+        android:drawablePadding="10dp"
+        />
+    <!-- 监听端口号 -->
+    <TextView
+        android:id="@+id/port_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/add_pass"
+        android:text="监听的端口：" />
+
+    <!-- 端口号 -->
+    <EditText
+        android:id="@+id/port_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/port_TextView"
+        android:text="8080" />
+
+    <!-- 发送的消息 -->
+    <TextView
+        android:id="@+id/message_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送的消息"
+        android:layout_below="@id/port_EditText"/>
+    <!-- 发送消息框 -->
+    <EditText
+        android:id="@+id/message_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/message_TextView"
+        android:hint="输入要发送的消息：" />
+
+    <!-- 启动按钮 -->
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/send_button"
+        android:layout_alignBottom="@+id/send_button"
+        android:layout_alignParentStart="true"
+        android:text="启动服务" />
+    <!-- 发送WIFI账号密码按钮 -->
+    <Button
+        android:id="@+id/send_WIFI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/send_button"
+        android:layout_marginLeft="100dp"
+        android:text="发送WIFI信息"/>
+    <!-- 发送按钮 -->
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/message_EditText"
+        android:layout_marginTop="21dp"
+        android:text="发送消息" />
+    <!-- 接收的消息-->
+    <TextView
+        android:id="@+id/receive_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_button"
+        android:text="接收的消息："
+        />
+    <!-- 接收消息框 -->
+    <EditText
+        android:id="@+id/receive_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/receive_TextView"
+        android:gravity="top" />
+</RelativeLayout>

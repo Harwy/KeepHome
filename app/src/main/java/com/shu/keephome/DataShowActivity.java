@@ -19,12 +19,17 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.MarkerView;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.shu.keephome.db.DataProduct;
 import com.shu.keephome.db.DataProductList;
+import com.shu.keephome.markview.MyMarkerView;
 import com.shu.keephome.util.HttpUtil;
 import com.shu.keephome.util.Utility;
 
@@ -325,14 +330,36 @@ public class DataShowActivity extends AppCompatActivity {
         dataSet.setValueTextColor(Color.rgb(89, 194, 230)); //数值显示的颜色
         dataSet.setValueTextSize(8f);     //数值显示的大小
 //        dataSet.setHighLightColor(Color.RED);
-//        dataSet.setDrawValues(true); // 是否在点上绘制Value
+        dataSet.setDrawValues(false); // 是否在点上绘制Value
 //        dataSet.setValueTextColor(Color.GREEN);
 //        dataSet.setValueTextSize(12f);
+        LimitLine limitLine;
+        if (i == 0){
+             limitLine = new LimitLine(32,"温度高限制性"); //得到限制线
+        }else if (i == 1){
+             limitLine = new LimitLine(60,"湿度高限制性"); //得到限制线
+        }else if(i == 2){
+             limitLine = new LimitLine(80,"PM2.5高限制性"); //得到限制线
+        }else{
+             limitLine = new LimitLine(95,"甲烷浓度高限制性"); //得到限制线
+        }
+
+        limitLine.setLineWidth(4f); //宽度
+        limitLine.setTextSize(10f);
+        limitLine.setTextColor(Color.RED);  //颜色
+        limitLine.setLineColor(Color.BLUE);
+        chart.getAxisRight().addLimitLine(limitLine); //Y轴添加限制线
+
+        // 设置MarkerView
+        MarkerView mv = new MyMarkerView(this,R.layout.markview);
+        mv.setChartView(chart);
+        chart.setMarker(mv);
+
         LineData lineData = new LineData(dataSet);
         chart.setTouchEnabled(true); //可点击
         chart.setDragEnabled(true);  //可拖拽
         chart.setScaleEnabled(true);  //可缩放
-        chart.setPinchZoom(false);
+        chart.setPinchZoom(true);
         chart.setData(lineData);
         chart.invalidate(); // refresh
     }

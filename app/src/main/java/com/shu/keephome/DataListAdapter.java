@@ -30,7 +30,6 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private List<DeviceList> mDataList;
 
-
     private OnItemClickListener clickListener;
 
     public void setClickListener(OnItemClickListener clickListener) {
@@ -42,13 +41,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
-
-
     static class ViewHolder extends RecyclerView.ViewHolder{
-
-
-
-
         public ViewHolder(View view){
             super(view);
 
@@ -71,7 +64,6 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new DHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.device_item, parent, false));
-
     }
 
 
@@ -96,32 +88,51 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((DHolder)holder).device_set_text.setText("离线");
             ((DHolder)holder).device_set_img.setImageResource(R.drawable.ic_outoffline);
         }
-        if (data.nowtime.hum > 75){
-            ((DHolder)holder).hum.setTextColor(Color.parseColor("#FF0000"));
-        }else {
+        if (data.nowtime.hum > 60){
+            ((DHolder)holder).hum.setTextColor(Color.parseColor("#cc33cc"));
+        }else if (data.nowtime.hum < 30){
+            ((DHolder)holder).hum.setTextColor(Color.parseColor("#ffff33"));
+        }else{
             ((DHolder)holder).hum.setTextColor(Color.parseColor("#000000"));
         }
-        if (data.nowtime.temp > 32){
-            ((DHolder)holder).temp.setTextColor(Color.parseColor("#FF0000"));
-        }else {
+        if (data.nowtime.temp < 5){
+            ((DHolder)holder).temp.setTextColor(Color.parseColor("#4169E1"));
+        }else if (data.nowtime.temp > 32){
+            ((DHolder)holder).temp.setTextColor(Color.parseColor("#EE5C42"));
+        }else{
             ((DHolder)holder).temp.setTextColor(Color.parseColor("#000000"));
         }
-        if (data.nowtime.pm2_5 > 100){
-            ((DHolder)holder).hum.setTextColor(Color.parseColor("#FF0000"));
-        }else {
-            ((DHolder)holder).hum.setTextColor(Color.parseColor("#000000"));
+        if (data.nowtime.pm2_5 < 50){
+            ((DHolder)holder).pm2_5_color.setText("优");
+            ((DHolder)holder).pm2_5_color.setTextColor(Color.parseColor("#00CD66"));
+        }else if(data.nowtime.pm2_5 < 100){
+            ((DHolder)holder).pm2_5_color.setText("良");
+            ((DHolder)holder).pm2_5_color.setTextColor(Color.parseColor("#00FA9A"));
+        }else if(data.nowtime.pm2_5 < 150){
+            ((DHolder)holder).pm2_5_color.setText("轻度");
+            ((DHolder)holder).pm2_5_color.setTextColor(Color.parseColor("#cc0000"));
+        }else if(data.nowtime.pm2_5 < 200){
+            ((DHolder)holder).pm2_5_color.setText("中度");
+            ((DHolder)holder).pm2_5_color.setTextColor(Color.parseColor("#ff9900"));
+        }else if(data.nowtime.pm2_5 < 300){
+            ((DHolder)holder).pm2_5_color.setText("重度");
+            ((DHolder)holder).pm2_5_color.setTextColor(Color.parseColor("#8e7cc3"));
+        }else{
+            ((DHolder)holder).pm2_5_color.setText("严重");
+            ((DHolder)holder).pm2_5_color.setTextColor(Color.parseColor("#a61c00"));
         }
         String uptime_temp = String.valueOf(data.nowtime.date);
         String hum_temp = String.valueOf(data.nowtime.hum) + " %";
         String tem_temp = String.valueOf(data.nowtime.temp) + "℃";
+        String pm2_5_temp = String.valueOf(data.nowtime.pm2_5) + "μg/m³";
+        String hcho_temp = String.valueOf(data.nowtime.hcho) + "ppm" ;
         String tag_temp = data.devName;
-        Log.d(TAG, "onBindViewHolder: main = " + data.nowtime);
         ((DHolder)holder).upTime.setText(uptime_temp);
         ((DHolder)holder).main.setText(tag_temp);
         ((DHolder)holder).temp.setText(tem_temp);
         ((DHolder)holder).hum.setText(hum_temp);
-        ((DHolder)holder).pm2_5.setText(String.valueOf(data.nowtime.pm2_5));
-        ((DHolder)holder).hcho.setText(String.valueOf(data.nowtime.hcho));
+        ((DHolder)holder).pm2_5.setText(pm2_5_temp);
+        ((DHolder)holder).hcho.setText(hcho_temp);
         //将数据保存在itemView的Tag中，以便点击时进行获取
 //        holder.itemView.setTag(mDataList.get(position));
     }
@@ -141,6 +152,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView pm2_5;
         TextView hcho;
         TextView upTime;
+        TextView pm2_5_color;
 
         ImageView device_set_img;
         TextView device_set_text;
@@ -156,6 +168,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             device_set_img = (ImageView) itemView.findViewById(R.id.device_set_img);
             device_set_text = (TextView) itemView.findViewById(R.id.device_set_text);
             upTime = (TextView) itemView.findViewById(R.id.device_time);
+            pm2_5_color = (TextView) itemView.findViewById(R.id.device_pm2_5_color);
 
             cardView = (CardView) itemView.findViewById(R.id.card_container);
             cardView.setOnClickListener(this);

@@ -4,11 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/chooser_area_fragment"
-        android:name="com.shu.keephome.ChooseDeviceFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
 
 
 

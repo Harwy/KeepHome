@@ -119,7 +119,10 @@ public class AddActivity extends AppCompatActivity {
             /**
              * 从WIFI账号框和密码框集成账号密码发送
              */
-            final String WIFI_inf = "00" + text_WIFI_name.getText().toString() + "," + text_WIFI_pass.getText().toString() + "\n";
+//            int c = 0x0a;
+//            int d = 0x0b;
+            final String WIFI_inf = "\\a" + text_WIFI_name.getText().toString() + "," + text_WIFI_pass.getText().toString()+"\\b";
+//            final String WIFI_inf = intToByte(c) + text_WIFI_name.getText().toString() + "," + text_WIFI_pass.getText().toString()+ intToByte(d);
             new Thread() {
                 @Override
                 public void run() {
@@ -144,6 +147,11 @@ public class AddActivity extends AppCompatActivity {
             }.start();
         }
     };
+
+
+    public static byte intToByte(int x) {
+        return (byte) x;
+    }
 
 
 

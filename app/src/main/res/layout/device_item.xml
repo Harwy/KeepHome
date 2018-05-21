@@ -109,6 +109,16 @@
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:text="0ppm"/>
+                <TextView
+                    android:id="@+id/device_pm2_5_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="end"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:text="优"
+                    />
 
             </LinearLayout>
 
@@ -144,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
-            android:layout_marginLeft="220dp">
+            android:layout_alignParentEnd="true">
             <ImageView
                 android:id="@+id/device_set_img"
                 android:layout_width="wrap_content"

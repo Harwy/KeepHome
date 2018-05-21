@@ -251,7 +251,7 @@ public class DrawableActivity extends AppCompatActivity{
                         public void run() {
                             closeProgressDialog();
                             name.setText(userName);
-                            name.setText(userEmail);
+                            email.setText(userEmail);
                             Log.d(TAG, "onActivityCreated: open");
                             Log.d(TAG, "run: 测试userName是否可用"+ userName);
 

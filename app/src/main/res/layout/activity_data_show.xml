@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="#fff"
-                    android:text="近期甲烷浓度曲线"/>
+                    android:text="近期甲醛浓度曲线"/>
 
 
                 <include layout="@layout/data_show_chart_hcho"/>

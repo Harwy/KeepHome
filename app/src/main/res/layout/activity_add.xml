@@ -69,19 +69,36 @@
         android:layout_below="@+id/port_TextView"
         android:text="8080" />
 
+    <!-- 绑定用户 -->
+    <TextView
+        android:id="@+id/id_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="绑定用户"
+        android:layout_below="@id/port_EditText"/>
+    <!-- 绑定用户名 -->
+    <EditText
+        android:id="@+id/id_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/id_TextView"
+        android:hint="登录的用户名" />
     <!-- 发送的消息 -->
     <TextView
         android:id="@+id/message_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:text="发送的消息"
-        android:layout_below="@id/port_EditText"/>
+        android:layout_below="@id/id_EditText"/>
     <!-- 发送消息框 -->
     <EditText
         android:id="@+id/message_EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:visibility="invisible"
         android:layout_below="@+id/message_TextView"
         android:hint="输入要发送的消息：" />
 
@@ -108,6 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:visibility="invisible"
         android:layout_below="@+id/message_EditText"
         android:layout_marginTop="21dp"
         android:text="发送消息" />
@@ -117,6 +135,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/start_button"
+        android:visibility="invisible"
         android:text="接收的消息："
         />
     <!-- 接收消息框 -->
@@ -125,6 +144,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:visibility="invisible"
         android:layout_below="@+id/receive_TextView"
         android:gravity="top" />
 </RelativeLayout>

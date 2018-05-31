@@ -1,6 +1,8 @@
 package com.shu.keephome;
 
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,10 +10,16 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,6 +39,8 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by 14623 on 2018/5/6.
@@ -74,6 +84,7 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
+
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         login = (Button) view.findViewById(R.id.login);
         username = (EditText) view.findViewById(R.id.edit_username);
@@ -105,6 +116,25 @@ public class LoginFragment extends Fragment {
             password.setText(psw);
             rememberPass.setChecked(true);
         }
+
+        Button btn_add = (Button) view.findViewById(R.id.login_add);
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_nav = new Intent(getActivity(), AddActivity.class);
+                startActivity(intent_nav);
+            }
+        });
+
+        Button btn_control = (Button) view.findViewById(R.id.login_control);
+        btn_control.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_nav = new Intent(getActivity(), ControlActivity.class);
+                startActivity(intent_nav);
+            }
+        });
+
         return view;
     }
 
@@ -241,4 +271,5 @@ public class LoginFragment extends Fragment {
             progressDialog.dismiss();
         }
     }
+
 }

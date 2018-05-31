@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 
@@ -173,6 +174,12 @@ public class AutoUpdateService extends Service {
 // Builds the notification and issues it.
         mNotifyMgr.notify(NOTIFICATION_ID++, mNotifyBuilder.build());
         // END_INCLUDE(send_notification)
+
+        new AlertDialog.Builder(getApplicationContext())
+                .setTitle("警告!")
+                .setMessage(message)
+                .setPositiveButton("明白了",null)
+                .show();
     }
 
 

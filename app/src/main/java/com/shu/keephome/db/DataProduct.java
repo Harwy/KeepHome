@@ -20,5 +20,7 @@ public class DataProduct {
 
     public Date date;
 
+    public String day;
+
 
 }

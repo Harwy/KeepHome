@@ -21,6 +21,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.MarkerView;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
@@ -30,6 +31,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.shu.keephome.db.DataProduct;
 import com.shu.keephome.db.DataProductList;
 import com.shu.keephome.markview.MyMarkerView;
+import com.shu.keephome.markview.MyXFormatter;
 import com.shu.keephome.util.HttpUtil;
 import com.shu.keephome.util.Utility;
 
@@ -78,15 +80,15 @@ public class DataShowActivity extends AppCompatActivity {
 
     private Button home;
 
-    double[] hum = new double[30];
+    double[] hum = new double[7];
 
-    double[] temp = new double[30];
+    double[] temp = new double[7];
 
-    double[] pm2_5 = new double[30];
+    double[] pm2_5 = new double[7];
 
-    double[] hcho = new double[30];
+    double[] hcho = new double[7];
 
-    String[] created = new String[30];
+    String[] created = new String[7];
 
     // 图表参数
     final LineChart[] mCharts = new LineChart[4];
@@ -197,7 +199,7 @@ public class DataShowActivity extends AppCompatActivity {
      * 获取设备下信息
      */
     private void initData(String device_id, final String StringTime){
-        String userUrl = "http://39.106.213.217:8080/api/device/" + device_id + "/search/";
+        String userUrl = "http://39.106.213.217:8080/api/device/" + device_id + "/sevenday/";
         HttpUtil.getHttp(userUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -308,21 +310,22 @@ public class DataShowActivity extends AppCompatActivity {
      */
     private void chartGet(LineChart chart, double[] a, int i){
         List<Entry> chartDataList = new ArrayList<>();
-        for(int y=0;y<30;y++){
+        for(int y=0;y<7;y++){
             chartData chartdata = new chartData();
-            chartdata.setValueX(y+1);
-            chartdata.setValueY((Math.round(a[29-y]*100))/100);
+//            double b = Double.valueOf(created[y].toString());
+            chartdata.setValueX(y);
+            chartdata.setValueY((Math.round(a[y]*100))/100);
             chartDataList.add(new BarEntry((float)(chartdata.getValueX()),(float)(chartdata.getValueY())));
         }
         String[] db = new String[]{
                 "近期温度折线图" ,
                 "近期湿度折线图",
                 "近期PM2.5折线图",
-                "近期甲烷浓度折线图",
+                "近期甲醛浓度折线图",
         };
         LineDataSet dataSet = new LineDataSet(chartDataList, db[i]); // add entries to dataset
         dataSet.setLineWidth(1.75f); // 线宽
-        dataSet.setCircleSize(2f);// 显示的圆形大小
+        dataSet.setCircleSize(4f);// 显示的圆形大小
         dataSet.setColor(Color.rgb(89, 194, 230));// 折线显示颜色
         dataSet.setCircleColor(Color.rgb(89, 194, 230));// 圆形折点的颜色
         dataSet.setHighLightColor(Color.GREEN); // 高亮的线的颜色
@@ -333,6 +336,7 @@ public class DataShowActivity extends AppCompatActivity {
         dataSet.setDrawValues(false); // 是否在点上绘制Value
 //        dataSet.setValueTextColor(Color.GREEN);
 //        dataSet.setValueTextSize(12f);
+
         LimitLine limitLine;
         if (i == 0){
              limitLine = new LimitLine(32,"温度高限制性"); //得到限制线
@@ -341,7 +345,7 @@ public class DataShowActivity extends AppCompatActivity {
         }else if(i == 2){
              limitLine = new LimitLine(80,"PM2.5高限制性"); //得到限制线
         }else{
-             limitLine = new LimitLine(95,"甲烷浓度高限制性"); //得到限制线
+             limitLine = new LimitLine(95,"甲醛浓度高限制性"); //得到限制线
         }
 
         limitLine.setLineWidth(4f); //宽度
@@ -355,10 +359,34 @@ public class DataShowActivity extends AppCompatActivity {
         mv.setChartView(chart);
         chart.setMarker(mv);
 
+
         LineData lineData = new LineData(dataSet);
+
+        Legend legend = chart.getLegend();
+        legend.setTextColor(Color.WHITE);
+
+        //自定义x轴显示
+        MyXFormatter formatter = new MyXFormatter(created);
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawAxisLine(false);
+        //绘制竖线
+        xAxis.setDrawGridLines(true);
+        //显示个数
+//        xAxis.setLabelCount(7);
+//        xAxis.setAxisLineWidth(10f);
+        xAxis.setValueFormatter(formatter);
+        xAxis.setTextColor(Color.WHITE);
+
+        YAxis yAxis = chart.getAxisLeft();
+        yAxis.setTextColor(Color.WHITE);
+
+
         chart.setTouchEnabled(true); //可点击
         chart.setDragEnabled(true);  //可拖拽
-        chart.setScaleEnabled(true);  //可缩放
+//        chart.setScaleEnabled(true);  //可缩放
+        chart.setScaleXEnabled(true);
+        chart.setScaleYEnabled(false);
         chart.setPinchZoom(true);
         chart.setData(lineData);
         chart.invalidate(); // refresh

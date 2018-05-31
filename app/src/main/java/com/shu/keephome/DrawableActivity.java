@@ -122,13 +122,11 @@ public class DrawableActivity extends AppCompatActivity{
         email = (TextView) headerLayout.findViewById(R.id.mail);
 
         actionBar = getSupportActionBar();
-        Log.d(TAG, "onCreateView: actionBar = " + actionBar);
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze_black_24dp);
         }
 
-        Log.d(TAG, "onCreateView: hello");
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
@@ -160,6 +158,8 @@ public class DrawableActivity extends AppCompatActivity{
                 switch (item.getItemId()){
                     case R.id.nav_add :
                         intent_nav = new Intent(DrawableActivity.this, AddActivity.class);
+                        intent_nav.putExtra("id", userid);
+                        intent_nav.putExtra("name", userName);
                         startActivity(intent_nav);
                         Log.d(TAG, "onNavigationItemSelected: 111："+ item);
                         break;

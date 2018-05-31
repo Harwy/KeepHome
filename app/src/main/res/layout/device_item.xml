@@ -126,24 +126,85 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:text="甲醛"
                     android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:text="甲烷"/>
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/device_hcho"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:text="0mg/m³"
                     android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:text="0mg"/>
+                    android:textSize="20sp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="灯光\n照明"
+                    android:textSize="25dp"/>
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/device_switchButton"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBaseline="@+id/control_text1"
+                    android:checked="false"
+                    app:kswAnimationDuration="300"
+                    app:kswBackDrawable="@drawable/ios_back_drawable"
+                    app:kswBackMeasureRatio="1.4"
+                    app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                    app:kswThumbMarginBottom="-8dp"
+                    app:kswThumbMarginLeft="-5dp"
+                    app:kswThumbMarginRight="-5dp"
+                    app:kswThumbMarginTop="-2.5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="空气\n净化"
+                    android:textSize="25dp"/>
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/device_switchButton1"
+                    style="@style/SwitchButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBaseline="@+id/control_text1"
+                    android:checked="false"
+                    app:kswAnimationDuration="300"
+                    app:kswBackDrawable="@drawable/ios_back_drawable"
+                    app:kswBackMeasureRatio="1.4"
+                    app:kswThumbDrawable="@drawable/ios_thumb_selector"
+                    app:kswThumbMarginBottom="-8dp"
+                    app:kswThumbMarginLeft="-5dp"
+                    app:kswThumbMarginRight="-5dp"
+                    app:kswThumbMarginTop="-2.5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/device_lamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_lamp_off"
+                    />
             </LinearLayout>
 
 

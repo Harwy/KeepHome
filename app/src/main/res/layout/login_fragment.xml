@@ -145,9 +145,23 @@
 
         </LinearLayout>
 
-
-
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/login_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="控制"/>
+    <Button
+        android:id="@+id/login_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="配置"/>
+
+
 
 
 </RelativeLayout>

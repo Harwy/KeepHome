@@ -1,7 +1,6 @@
 package com.shu.keephome;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kyleduo.switchbutton.SwitchButton;
 import com.shu.keephome.db.DeviceList;
 
 import java.util.Date;
@@ -73,7 +74,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @param position
      */
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final DeviceList data = mDataList.get(position);
         Date date = new Date();
         long d1 = date.getTime();
@@ -135,6 +136,17 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ((DHolder)holder).hcho.setText(hcho_temp);
         //将数据保存在itemView的Tag中，以便点击时进行获取
 //        holder.itemView.setTag(mDataList.get(position));
+
+        ((DHolder)holder).btn_lamp_ON.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    ((DHolder)holder).device_lamp.setImageResource(R.drawable.ic_lamp_on);
+                }else{
+                    ((DHolder)holder).device_lamp.setImageResource(R.drawable.ic_lamp_off);
+                }
+            }
+        });
     }
 
 
@@ -153,6 +165,10 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView hcho;
         TextView upTime;
         TextView pm2_5_color;
+        SwitchButton btn_lamp_ON;
+        SwitchButton btn_device_ON;
+        ImageView device_lamp;
+
 
         ImageView device_set_img;
         TextView device_set_text;
@@ -169,6 +185,10 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             device_set_text = (TextView) itemView.findViewById(R.id.device_set_text);
             upTime = (TextView) itemView.findViewById(R.id.device_time);
             pm2_5_color = (TextView) itemView.findViewById(R.id.device_pm2_5_color);
+            btn_device_ON = (SwitchButton) itemView.findViewById(R.id.device_switchButton1);
+            btn_lamp_ON = (SwitchButton) itemView.findViewById(R.id.device_switchButton);
+            device_lamp = (ImageView) itemView.findViewById(R.id.device_lamp);
+
 
             cardView = (CardView) itemView.findViewById(R.id.card_container);
             cardView.setOnClickListener(this);

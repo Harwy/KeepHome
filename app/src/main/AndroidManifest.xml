@@ -62,7 +62,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ControlActivity"></activity>
+        <activity android:name=".ControlActivity">
+            <intent-filter>
+                <action android:name="com.shu.keephome.CONTROL"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

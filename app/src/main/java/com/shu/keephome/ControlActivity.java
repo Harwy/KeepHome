@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +36,15 @@ public class ControlActivity extends AppCompatActivity {
 
 
     private int state;
+    private String device;
 
+    private TextView text;
     private TextView text1;
     private TextView text2;
+    private TextView text_inf;
+    private ImageView img1;
+    private ImageView img2;
+
 
     private Boolean FLAG_1 = false;
     private Boolean FLAG_2 = false;
@@ -54,17 +61,23 @@ public class ControlActivity extends AppCompatActivity {
 
         SwitchButton mSwitchButton = (SwitchButton) findViewById(R.id.switchButton);
         SwitchButton mSwitchButton2 = (SwitchButton) findViewById(R.id.switchButton2);
+        text = (TextView)findViewById(R.id.control_text);
         text1 = (TextView)findViewById(R.id.control_text2);
         text2 = (TextView)findViewById(R.id.control_text4);
+        text_inf = (TextView) findViewById(R.id.control_text1);
+        img1 = (ImageView) findViewById(R.id.control_img1);
+        img2 = (ImageView) findViewById(R.id.control_img2);
 
+        device = getIntent().getStringExtra("device");
+        text.setText("目前控制设备 device：" +device);
 
         mSwitchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    PostControl("1","5","1");
+                    PostControl("1",device,"1");
                 }else{
-                    PostControl("2","5","2");
+                    PostControl("2",device,"2");
                 }
             }
         });
@@ -73,9 +86,9 @@ public class ControlActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    PostControl("3","5","3");
+                    PostControl("3",device,"3");
                 }else{
-                    PostControl("4","5","4");
+                    PostControl("4",device,"4");
                 }
             }
         });
@@ -107,7 +120,9 @@ public class ControlActivity extends AppCompatActivity {
                             case "1":
                                 if (state == 1){
                                     text1.setText("开灯");
+                                    img1.setImageResource(R.drawable.ic_lamp_on);
                                     Toast.makeText(ControlActivity.this, "操作：开灯 成功",Toast.LENGTH_SHORT).show();
+
                                 }else {
                                     Toast.makeText(ControlActivity.this, "操作：开灯 过于频繁",Toast.LENGTH_SHORT).show();
                                 }
@@ -115,7 +130,9 @@ public class ControlActivity extends AppCompatActivity {
                             case "2":
                                 if (state == 1){
                                     text1.setText("关灯");
+                                    img1.setImageResource(R.drawable.ic_lamp_off);
                                     Toast.makeText(ControlActivity.this, "操作：关灯 成功",Toast.LENGTH_SHORT).show();
+
                                 }else {
                                     Toast.makeText(ControlActivity.this, "操作：关灯 过于频繁",Toast.LENGTH_SHORT).show();
                                 }
@@ -123,6 +140,7 @@ public class ControlActivity extends AppCompatActivity {
                             case "3":
                                 if (state == 1){
                                     text2.setText("开启设备");
+                                    img2.setImageResource(R.drawable.top_lamp_on);
                                     Toast.makeText(ControlActivity.this, "操作：开启设备 成功",Toast.LENGTH_SHORT).show();
                                 }else {
                                     Toast.makeText(ControlActivity.this, "操作：开启设备 过于频繁",Toast.LENGTH_SHORT).show();
@@ -131,6 +149,7 @@ public class ControlActivity extends AppCompatActivity {
                             case "4":
                                 if (state == 1){
                                     text2.setText("关闭设备");
+                                    img2.setImageResource(R.drawable.top_lamp_off);
                                     Toast.makeText(ControlActivity.this, "操作：关闭设备 成功",Toast.LENGTH_SHORT).show();
                                 }else {
                                     Toast.makeText(ControlActivity.this, "操作：关闭设备 过于频繁",Toast.LENGTH_SHORT).show();

@@ -1,6 +1,7 @@
 package com.shu.keephome;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,7 +51,8 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public DataListAdapter(List<DeviceList> dataList){
+    public DataListAdapter(Context c,List<DeviceList> dataList){
+        this.mContext = c;
         mDataList = dataList;
     }
 
@@ -137,14 +140,30 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         //将数据保存在itemView的Tag中，以便点击时进行获取
 //        holder.itemView.setTag(mDataList.get(position));
 
-        ((DHolder)holder).btn_lamp_ON.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//        ((DHolder)holder).btn_lamp_ON.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                if (b){
+//                    ((DHolder)holder).device_lamp.setImageResource(R.drawable.ic_lamp_on);
+//                }else{
+//                    ((DHolder)holder).device_lamp.setImageResource(R.drawable.ic_lamp_off);
+//                }
+//            }
+//        });
+        ((DHolder)holder).btn_device.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    ((DHolder)holder).device_lamp.setImageResource(R.drawable.ic_lamp_on);
-                }else{
-                    ((DHolder)holder).device_lamp.setImageResource(R.drawable.ic_lamp_off);
+            public void onClick(View v) {
+                try {
+                    Intent intent_nav = new Intent(mContext, ControlActivity.class);
+                    intent_nav.putExtra("device", String.valueOf(data.id));
+                    intent_nav.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                    Log.d(TAG, "onClick: mContext:" + mContext);
+                    mContext.startActivity(intent_nav);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
                 }
+
             }
         });
     }
@@ -165,9 +184,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView hcho;
         TextView upTime;
         TextView pm2_5_color;
-        SwitchButton btn_lamp_ON;
-        SwitchButton btn_device_ON;
-        ImageView device_lamp;
+        Button btn_device;
 
 
         ImageView device_set_img;
@@ -185,10 +202,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             device_set_text = (TextView) itemView.findViewById(R.id.device_set_text);
             upTime = (TextView) itemView.findViewById(R.id.device_time);
             pm2_5_color = (TextView) itemView.findViewById(R.id.device_pm2_5_color);
-            btn_device_ON = (SwitchButton) itemView.findViewById(R.id.device_switchButton1);
-            btn_lamp_ON = (SwitchButton) itemView.findViewById(R.id.device_switchButton);
-            device_lamp = (ImageView) itemView.findViewById(R.id.device_lamp);
-
+            btn_device = (Button) itemView.findViewById(R.id.control_btn);
 
             cardView = (CardView) itemView.findViewById(R.id.card_container);
             cardView.setOnClickListener(this);

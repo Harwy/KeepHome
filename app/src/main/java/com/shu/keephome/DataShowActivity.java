@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import android.util.Log;
@@ -80,15 +81,15 @@ public class DataShowActivity extends AppCompatActivity {
 
     private Button home;
 
-    double[] hum = new double[7];
+    double[] hum = new double[8];
 
-    double[] temp = new double[7];
+    double[] temp = new double[8];
 
-    double[] pm2_5 = new double[7];
+    double[] pm2_5 = new double[8];
 
-    double[] hcho = new double[7];
+    double[] hcho = new double[8];
 
-    String[] created = new String[7];
+    String[] created = new String[8];
 
     // 图表参数
     final LineChart[] mCharts = new LineChart[4];
@@ -257,7 +258,7 @@ public class DataShowActivity extends AppCompatActivity {
             pm2_5[i] = dataProducts.get(i).pm2_5;
             hcho[i] = dataProducts.get(i).hcho;
         }
-        DataProduct dataProduct = dataProducts.get(0);
+        DataProduct dataProduct = dataProducts.get(dataProducts.size() - 1);
         SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss.SSS");
         try {
             dataProduct.date = format.parse(dataProduct.created);
@@ -366,7 +367,7 @@ public class DataShowActivity extends AppCompatActivity {
         legend.setTextColor(Color.WHITE);
 
         //自定义x轴显示
-        MyXFormatter formatter = new MyXFormatter(created);
+        MyXFormatter formatter = new MyXFormatter(Arrays.copyOfRange(created, 0, 7));
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawAxisLine(false);

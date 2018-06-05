@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,7 +80,27 @@ public class AddActivity extends AppCompatActivity {
 
         text_WIFI_name = (EditText)findViewById(R.id.add_wifi);
         text_WIFI_pass = (EditText) findViewById(R.id.add_pass);
-        text_WIFI_name.setOnClickListener(text_WIFI_nameListener);
+//        text_WIFI_name.setOnClickListener(text_WIFI_nameListener);
+        text_WIFI_name.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // text_WIFI_name.getCompoundDrawables()得到一个长度为4的数组，分别表示左右上下四张图片
+                Drawable drawable = text_WIFI_name.getCompoundDrawables()[2];
+                //如果右边没有图片，不再处理
+                if (drawable == null)
+                    return false;
+                //如果不是按下事件，不再处理
+                if (event.getAction() != MotionEvent.ACTION_UP)
+                    return false;
+                if (event.getX() > text_WIFI_name.getWidth()
+                        - text_WIFI_name.getPaddingRight()
+                        - drawable.getIntrinsicWidth()){
+                    text_WIFI_nameListener();
+                }
+                return false;
+            }
+        });
         send_WIFI = (Button) findViewById(R.id.send_WIFI);
         send_WIFI.setOnClickListener(send_WIFIListener);
 
@@ -124,16 +146,13 @@ public class AddActivity extends AppCompatActivity {
     /**
      * 启动WIFI设置界面
      */
-    private View.OnClickListener text_WIFI_nameListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View v) {
+    private void text_WIFI_nameListener(){
             // TODO Auto-generated method stub
             /**
              * 切换到WIFI设置界面
              */
             Intent wifiSettingsIntent = new Intent("android.settings.WIFI_SETTINGS");
             startActivity(wifiSettingsIntent);
-        }
     };
 
     /**
@@ -237,22 +256,22 @@ public class AddActivity extends AppCompatActivity {
                 .show();
     }
 
-    /**
-     * 向服务器发送绑定弹窗
-     */
-    private void showDialog1() {
-        new AlertDialog.Builder(this)
-                .setTitle("确认提示")
-                .setMessage("即将于服务器同步，请确认！")
-                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        connect_Ali(getIntent().getStringExtra("userid"),"5");
-                    }
-                })
-                .setNegativeButton("取消",null)
-                .show();
-    }
+//    /**
+//     * 向服务器发送绑定弹窗
+//     */
+//    private void showDialog1() {
+//        new AlertDialog.Builder(this)
+//                .setTitle("确认提示")
+//                .setMessage("即将于服务器同步，请确认！")
+//                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        connect_Ali(getIntent().getStringExtra("userid"),"5");
+//                    }
+//                })
+//                .setNegativeButton("取消",null)
+//                .show();
+//    }
 
 
     public static byte intToByte(int x) {
@@ -366,9 +385,8 @@ public class AddActivity extends AppCompatActivity {
                         public void run()
                         {
                             receiveEditText.setText(new String(buf,0,len));
-                            String rec = new String(buf,0,len);
-                            String rec_byte = hexStr2Str(rec);
-                            Log.d(TAG, "run: rec" + rec_byte);
+                            byte[] rec_byte = buf;
+                            Log.d(TAG, "run: rec" + rec_byte[0]);
                         }
                     });
                 }

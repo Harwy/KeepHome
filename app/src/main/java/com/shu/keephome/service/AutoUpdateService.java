@@ -175,11 +175,11 @@ public class AutoUpdateService extends Service {
         mNotifyMgr.notify(NOTIFICATION_ID++, mNotifyBuilder.build());
         // END_INCLUDE(send_notification)
 
-        new AlertDialog.Builder(getApplicationContext())
-                .setTitle("警告!")
-                .setMessage(message)
-                .setPositiveButton("明白了",null)
-                .show();
+//        new AlertDialog.Builder(getApplicationContext())
+//                .setTitle("警告!")
+//                .setMessage(message)
+//                .setPositiveButton("明白了",null)
+//                .show();
     }
 
 

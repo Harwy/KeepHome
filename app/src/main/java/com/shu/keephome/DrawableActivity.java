@@ -130,7 +130,7 @@ public class DrawableActivity extends AppCompatActivity{
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new DataListAdapter(dataList);
+        adapter = new DataListAdapter(this, dataList);
         recyclerView.setAdapter(adapter);
 
         if(userid != null){
@@ -161,24 +161,21 @@ public class DrawableActivity extends AppCompatActivity{
                         intent_nav.putExtra("id", userid);
                         intent_nav.putExtra("name", userName);
                         startActivity(intent_nav);
-                        Log.d(TAG, "onNavigationItemSelected: 111："+ item);
                         break;
                     case R.id.nav_inf :
                         intent_nav = new Intent(DrawableActivity.this, InfActivity.class);
                         intent_nav.putExtra("index", userid);
                         startActivity(intent_nav);
-                        Log.d(TAG, "onNavigationItemSelected: 111："+ item);
                         break;
                     case R.id.nav_about :
                         intent_nav = new Intent(DrawableActivity.this, AboutActivity.class);
                         intent_nav.putExtra("index", item.getTitle());
                         startActivity(intent_nav);
-                        Log.d(TAG, "onNavigationItemSelected: 111："+ item.getTitle());
                         break;
-                    case R.id.nav_control:
-                        intent_nav = new Intent(DrawableActivity.this, ControlActivity.class);
-                        startActivity(intent_nav);
-                        break;
+//                    case R.id.nav_control:
+//                        intent_nav = new Intent(DrawableActivity.this, ControlActivity.class);
+//                        startActivity(intent_nav);
+//                        break;
                     default:
                         break;
                 }
@@ -191,7 +188,6 @@ public class DrawableActivity extends AppCompatActivity{
             public void onClick(View view, int position) {
                 Intent intent = new Intent(DrawableActivity.this, DataShowActivity.class);
                 intent.putExtra("device_id", device_data_list.get(position));  // 向下一个活动传递用户名
-                Log.d(TAG, "onClick: position = "+ device_data_list.get(position));
                 startActivity(intent);
             }
         });
@@ -254,8 +250,6 @@ public class DrawableActivity extends AppCompatActivity{
                             email.setText(userEmail);
                             Log.d(TAG, "onActivityCreated: open");
                             Log.d(TAG, "run: 测试userName是否可用"+ userName);
-
-
                         }
                     });
                 }

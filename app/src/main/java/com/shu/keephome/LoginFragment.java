@@ -171,6 +171,14 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        // 若已经登录成功，则保持登录状态
+        if (pref.getBoolean("is_enter", false) == true){
+            Intent intent = new Intent(getActivity(), DrawableActivity.class);
+            intent.putExtra("userid", pref.getString("userid", null));  // 向下一个活动传递用户名
+            startActivity(intent);
+            getActivity().finish();
+        }
+
 
     }
 
@@ -201,8 +209,8 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void run() {
                             closeProgressDialog();
+                            editor = pref.edit();
                             if ("0".equals(status)){
-                                editor = pref.edit();
                                 if (rememberPass.isChecked()){ // 复选框是否被选中
                                     editor.putBoolean("remember_password", true);
                                     editor.putString("account", account);
@@ -210,20 +218,28 @@ public class LoginFragment extends Fragment {
                                 }else {
                                     editor.clear();
                                 }
+                                editor.putBoolean("is_enter", true);
+                                editor.putString("userid", userid);
                                 editor.apply();
                                 Intent intent = new Intent(getActivity(), DrawableActivity.class);
                                 intent.putExtra("userid", userid);  // 向下一个活动传递用户名
                                 startActivity(intent);
                                 getActivity().finish();
                             }else if ("1".equals(status)){
+                                editor.putBoolean("is_enter", false);
+                                editor.apply();
                                 Toast.makeText(getActivity(), "该用户不存在", Toast.LENGTH_SHORT).show();
                                 tip.setText("该用户不存在");
                                 tip.setTextColor(Color.parseColor("#FF0000"));
                             }else if ("2".equals(status)){
+                                editor.putBoolean("is_enter", false);
+                                editor.apply();
                                 Toast.makeText(getActivity(), "密码输入错误", Toast.LENGTH_SHORT).show();
                                 tip.setText("密码输入错误");
                                 tip.setTextColor(Color.parseColor("#FF0000"));
                             }else {
+                                editor.putBoolean("is_enter", false);
+                                editor.apply();
                                 Toast.makeText(getActivity(), "联网出错咯", Toast.LENGTH_SHORT).show();
                                 tip.setText("联网出错咯");
                                 tip.setTextColor(Color.parseColor("#FF0000"));

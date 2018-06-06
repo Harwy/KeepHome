@@ -109,6 +109,7 @@ public class AutoUpdateService extends Service {
             FLAG = 0;
         }
 
+        // 后台10s定时查询通知
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         int anHour = 10 * 1000;    // 10s的毫秒数
         long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
@@ -162,7 +163,7 @@ public class AutoUpdateService extends Service {
                         .setContentTitle("警告！")
                         .setContentText(message)
                         .setDefaults(Notification.DEFAULT_ALL)
-                        .setSmallIcon(R.drawable.ic_launcher_background)
+                        .setSmallIcon(R.drawable.ic_warning_red_500_24dp)
                         .setFullScreenIntent(pendingIntent, false)
                         .setContentIntent(pendingIntent);
 //                        .setAutoCancel(true);
@@ -180,6 +181,7 @@ public class AutoUpdateService extends Service {
 //                .setMessage(message)
 //                .setPositiveButton("明白了",null)
 //                .show();
+
     }
 
 

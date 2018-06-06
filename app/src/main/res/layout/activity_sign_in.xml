@@ -84,6 +84,12 @@
                 android:inputType="number" />
 
         </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/sign_btnin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            />
 
     </LinearLayout>
 

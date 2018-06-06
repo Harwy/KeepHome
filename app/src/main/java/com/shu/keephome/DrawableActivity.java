@@ -172,10 +172,17 @@ public class DrawableActivity extends AppCompatActivity{
                         intent_nav.putExtra("index", item.getTitle());
                         startActivity(intent_nav);
                         break;
-//                    case R.id.nav_control:
-//                        intent_nav = new Intent(DrawableActivity.this, ControlActivity.class);
-//                        startActivity(intent_nav);
-//                        break;
+                    case R.id.nav_exit:
+                        SharedPreferences sp = getContext().getSharedPreferences("com.shu.keephome_preferences" ,getContext().MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sp.edit();
+                        Log.d(TAG, "onNavigationItemSelected: " + sp.getBoolean("is_enter", false));
+                        editor.putBoolean("is_enter", false);
+                        editor.apply();
+                        Log.d(TAG, "onNavigationItemSelected: " + sp.getBoolean("is_enter", false));
+                        intent_nav = new Intent(DrawableActivity.this, LoginActivity.class);
+                        startActivity(intent_nav);
+                        finish();
+                        break;
                     default:
                         break;
                 }

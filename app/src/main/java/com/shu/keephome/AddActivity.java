@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,7 +61,10 @@ public class AddActivity extends AppCompatActivity {
 
     private String state; //状态标志位
 
-    private ProgressDialog progressDialog;//提示框
+    private ProgressDialog progressDialog = null;//提示框
+
+    private static final int SHOW = 1;
+    private static final int HIDE = 0;
 
 
 
@@ -139,7 +144,7 @@ public class AddActivity extends AppCompatActivity {
         }catch (IOException e){
             e.printStackTrace();
         }
-
+        finish();
         super.onBackPressed();
     }
 
@@ -168,43 +173,6 @@ public class AddActivity extends AppCompatActivity {
         }
     };
 
-    /**
-     * 向数据库请求绑定设备
-     * @param userid,deviceid
-     * @return
-     */
-    private void connect_Ali(String userid, String deviceid){
-        // 组成url
-        String userUrl = "http://39.106.213.217:8080/api/connect/" + deviceid + "/" + userid + "/";
-        HttpUtil.getHttp(userUrl, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-//                Toast.makeText(getApplicationContext(), "绑定失败，请联系作者！", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String s = response.body().string();
-                try{
-                    JSONObject jsonObject = new JSONObject(s);
-                    state = jsonObject.getString("state");
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                AddActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if ("1".equals(state)){
-                            Toast.makeText(getApplicationContext(), "绑定成功",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(), "绑定失败，请联系作者！", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-            }
-        });
-    }
 
     /**
      * 消息文本框
@@ -247,31 +215,23 @@ public class AddActivity extends AppCompatActivity {
                                 }
                             }
                         }.start();
-//                        showProgressDialog();
-//                        closeProgressDialog();
-//                        showDialog1();
+                        handler.sendEmptyMessage(SHOW);
+                        new Thread() {
+                            public void run() {
+                                try {
+                                    Thread.sleep(3000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                handler.sendEmptyMessage(HIDE);
+                            }
+                        }.start();
                     }
                 })
                 .setNegativeButton("取消",null)
                 .show();
     }
 
-//    /**
-//     * 向服务器发送绑定弹窗
-//     */
-//    private void showDialog1() {
-//        new AlertDialog.Builder(this)
-//                .setTitle("确认提示")
-//                .setMessage("即将于服务器同步，请确认！")
-//                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        connect_Ali(getIntent().getStringExtra("userid"),"5");
-//                    }
-//                })
-//                .setNegativeButton("取消",null)
-//                .show();
-//    }
 
 
     public static byte intToByte(int x) {
@@ -385,8 +345,8 @@ public class AddActivity extends AppCompatActivity {
                         public void run()
                         {
                             receiveEditText.setText(new String(buf,0,len));
-                            byte[] rec_byte = buf;
-                            Log.d(TAG, "run: rec" + rec_byte[0]);
+//                            byte[] rec_byte = buf;
+//                            Log.d(TAG, "run: rec" + rec_byte[0]);
                         }
                     });
                 }
@@ -423,44 +383,22 @@ public class AddActivity extends AppCompatActivity {
     }
 
     /**
-     * 显示进度对话框
+     * 进度对话框
      */
-    private void showProgressDialog(){
-        if(progressDialog == null){
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("正在加载...");
-            progressDialog.setCanceledOnTouchOutside(false);
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SHOW:
+                    progressDialog = ProgressDialog.show(AddActivity.this, "与环境监测仪通信中", "正在加载......");
+                    break;
+                case HIDE:
+                    progressDialog.dismiss();
+            }
         }
-        progressDialog.show();
-    }
+    };
 
-    /**
-     * 关闭进度对话框
-     */
-    private void closeProgressDialog(){
-        if (progressDialog != null){
-            progressDialog.dismiss();
-        }
-    }
 
-//    //将输入的16进制string转成字节
-//    public static byte[] hexStringToBytes(String hexString) {
-//        if (hexString == null || hexString.equals("")) {
-//            return null;
-//        }
-//        hexString = hexString.toUpperCase();
-//        int length = hexString.length() / 2;
-//        char[] hexChars = hexString.toCharArray();
-//        byte[] d = new byte[length];
-//        for (int i = 0; i < length; i++) {
-//            int pos = i * 2;
-//            d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
-//        }
-//        return d;
-//    }
-//    private static byte charToByte(char c) {
-//        return (byte) "0123456789ABCDEF".indexOf(c);
-//    }
 
 
 }

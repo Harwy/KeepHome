@@ -129,7 +129,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         String hum_temp = String.valueOf(data.nowtime.hum) + " %";
         String tem_temp = String.valueOf(data.nowtime.temp) + "℃";
         String pm2_5_temp = String.valueOf(data.nowtime.pm2_5) + "μg/m³";
-        String hcho_temp = String.valueOf(data.nowtime.hcho) + "ppm" ;
+        String hcho_temp = String.valueOf(data.nowtime.hcho) + "ppb" ;
         String tag_temp = data.devName;
         ((DHolder)holder).upTime.setText(uptime_temp);
         ((DHolder)holder).main.setText(tag_temp);
